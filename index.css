@@ -1,3 +1,54 @@
-* {
+/* * {
     outline: 1px solid red;
+} */
+
+body {
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Monaco, monospace;
+    background-color: #202225;
+    color: #99aab5;
+}
+
+button {
+    flex: 1;
+    width: 100px;
+    height: 70px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px black;
+    opacity: 0.6;
+    transition: 0.3s;
+    background-color: white;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    height: 500px;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+}
+
+.display {
+    flex: auto;
+    height: 83px;
+    box-shadow: 0px 0px 2px 2px black;
+    background-color: white;
+    margin-bottom: 2px;
+    border: none;
+    border-radius: 10px;
 }
