@@ -55,6 +55,8 @@ operators.forEach((button) => {
     });
 });
 
+// equals function, that takes the value in display as the second argument and passed them 
+// into the operate function
 const equals = document.querySelector('#equals');
 equals.addEventListener('click', () => {
     argumentTwo = Number(displayValue);
