@@ -18,12 +18,14 @@ button {
     flex: 1;
     width: 100px;
     height: 70px;
+    margin: 1px;
     border: none;
     border-radius: 10px;
     box-shadow: 0px 0px 2px 2px black;
     opacity: 0.6;
     transition: 0.3s;
     background-color: white;
+    font-size: x-large;
 }
 
 button:hover {
