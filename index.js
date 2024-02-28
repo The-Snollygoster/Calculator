@@ -1,18 +1,22 @@
-let argumentOne = '';
-let operator = '';
-let argumentTwo = '';
+// declared variables for computation
+const display = document.querySelector('.display');
+let displayValue = '';
+let argumentOne;
+let operator;
+let argumentTwo;
 
+// Basic functions
 function addition(x, y) {
-    return x + y;
+    return display.textContent = x + y;
 };
 function subtraction(x, y) {
-    return x - y;
+    return display.textContent = x - y;
 };
 function multiplication(x, y) {
-    return x * y;
+    return display.textContent = x * y;
 };
 function division(x, y) {
-    return x / y;
+    return display.textContent = x / y;
 };
 
 function operate(a, b, c) {
@@ -29,5 +33,31 @@ function operate(a, b, c) {
 
 // Clear button functionality
 const clearButton = document.querySelector('#clearElse');
-let display = document.querySelector('.display');
 clearButton.addEventListener('click', () => display.textContent = '');
+
+// Display population function and number button listeners
+const numbers = document.querySelectorAll('.number');
+numbers.forEach((button) => {
+    button.addEventListener('click', () => {
+        display.textContent += button.id;
+        displayValue += button.id;
+    });
+});
+// Listener for the operators, capturing the current displayValue and 
+// operator and emptying display for second number
+const operators = document.querySelectorAll('.operator');
+operators.forEach((button) => {
+    button.addEventListener('click', () => {
+        argumentOne = Number(displayValue);
+        operator = button.id;
+        displayValue = '';
+        display.textContent = '';
+    });
+});
+
+const equals = document.querySelector('#equals');
+equals.addEventListener('click', () => {
+    argumentTwo = Number(displayValue);
+    operate(argumentOne, operator, argumentTwo)
+    displayValue = '';
+});
