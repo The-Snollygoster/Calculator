@@ -24,7 +24,7 @@ function operate(a, b, c) {
         addition(a,c);
     } else if (b == '-') {
         subtraction(a,c);
-    } else if (b == 'x') {
+    } else if (b == '*') {
         multiplication(a,c);
     } else if (b == '/') {
         division(a,c);
