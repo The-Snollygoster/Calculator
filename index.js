@@ -5,6 +5,12 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
 const backspace = document.querySelector('#backspace');
 const empty = document.querySelector('#empty');
+const plusMinus = document.querySelector('#convert');
+const root = document.querySelector('#root');
+const square = document.querySelector('#square');
+const percent = document.querySelector('#percent');
+const oBracket = document.querySelector('#openBracket');
+const cBracket = document.querySelector('#closeBracket');
 let display = document.querySelector('.display');
 let smallDisplay = document.querySelector('.smallDisplay');
 let currentValue = '';
@@ -138,16 +144,37 @@ decimal.addEventListener('click', () => {
     }
 });
 
+convert.addEventListener('click', () => {
+    if (currentValue > -1) {
+    display.value = -Math.abs(currentValue);
+    currentValue = display.value;
+    } else if (currentValue < 0) {
+    display.value = Math.abs(currentValue);
+    currentValue = display.value;
+    }
+});
+
+root.addEventListener('click', () => {
+
+});
+
+square.addEventListener('click', () => {
+    display.value = currentValue * currentValue;
+    currentValue = display.value;
+});
+
+percent.addEventListener('click', () => {
+
+});
+
+// oBracket.addEventListener('click', () => {
+//     display.value += '(';
+// });
+
+// cBracket.addEventListener('click', () => {
+//     display.value += ')';
+// });
+
 // add commas for big numbers
 
-// +/- button. That converts the current number in the display to a negative or positive
-
-// square root button
-
-// square button 
-
-// cube button
-
-// percent button
-
-// bracket buttons. Might combine these into 1 so I can add the % button?
+// allow the use of minus as the first button pressed to express a negative number
