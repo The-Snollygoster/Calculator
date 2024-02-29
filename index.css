@@ -1,7 +1,3 @@
-/* * {
-    outline: 1px solid red;
-} */
-
 body {
     text-align: center;
     box-sizing: border-box;
@@ -55,10 +51,6 @@ body {
     background-color: grey;
     font-size: x-large;
 }
-
-/* button:hover {
-    opacity: 1;
-} */
 
 button:active {
     opacity: 0.6;

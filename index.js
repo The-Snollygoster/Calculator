@@ -16,7 +16,11 @@ function multiplication(x, y) {
     return display.textContent = x * y;
 };
 function division(x, y) {
-    return display.textContent = x / y;
+    if (y == 0) {
+        return display.textContent = 'Undefined'
+    } else {
+        return display.textContent = x / y;
+    }
 };
 
 function operate(a, b, c) {
@@ -61,7 +65,7 @@ const equals = document.querySelector('#equals');
 equals.addEventListener('click', () => {
     argumentTwo = Number(displayValue);
     operate(argumentOne, operator, argumentTwo)
-    displayValue = '';
+    displayValue = display.textContent;
 });
 
 // Backspace functionality
@@ -84,9 +88,12 @@ argumentTwo = '';
 
 // Once a calculation is done. Change it so the next button pressed 'restarts'
 // ATM you have to clear before you use again
-// Allow functionality that multiple presses of equals will copy the last calculation done
-// add more complex scientific calc buttons
-// Make the decimal work but disable it when there is already a decimal in the display
+
 // Also want to round decimals so they fit inside the display.
-// create error message for divide by 0
-// All strings of operators eg 12 + 7 - 5 * 3 
+
+// Make the decimal work but disable it when there is already a decimal in the display
+
+// Allow functionality that multiple presses of equals will copy the last calculation done
+
+// add more complex scientific calc buttons
+
