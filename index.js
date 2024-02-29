@@ -64,7 +64,7 @@ numbers.forEach((button) => {
 });
 
 operators.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', () => { 
         if (argumentOne == '') {
             argumentOne = Number(currentValue);
             operator = button.id;
@@ -155,7 +155,14 @@ convert.addEventListener('click', () => {
 });
 
 root.addEventListener('click', () => {
-
+    let rootAnswer = Math.sqrt(currentValue);
+    if (rootAnswer.toString().length > 9) {
+        display.value = rootAnswer.toFixed(5)
+    } else {
+        display.value = Math.sqrt(currentValue);
+    }
+    currentValue = display.value;
+    answer = display.value;
 });
 
 square.addEventListener('click', () => {
@@ -166,14 +173,17 @@ square.addEventListener('click', () => {
 percent.addEventListener('click', () => {
 
 });
+percent.disabled = true;
 
-// oBracket.addEventListener('click', () => {
-//     display.value += '(';
-// });
+oBracket.addEventListener('click', () => {
+    display.value += '(';
+});
+oBracket.disabled = true;
 
-// cBracket.addEventListener('click', () => {
-//     display.value += ')';
-// });
+cBracket.addEventListener('click', () => {
+    display.value += ')';
+});
+cBracket.disabled = true;
 
 // add commas for big numbers
 
