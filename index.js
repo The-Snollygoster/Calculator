@@ -1,25 +1,27 @@
 // declared variables for computation
 let display = document.querySelector('.display');
-let displayValue = '';
-let argumentOne;
-let operator;
-let argumentTwo;
+let smallDisplay = document.querySelector('.smallDisplay');
+let currentValue = '';
+let argumentOne = '';
+let operator = '';
+let argumentTwo = '';
+let answer = '';
 
 // Basic functions
 function addition(x, y) {
-    return display.textContent = x + y;
+    return answer = x + y;
 };
 function subtraction(x, y) {
-    return display.textContent = x - y;
+    return answer = x - y;
 };
 function multiplication(x, y) {
-    return display.textContent = x * y;
+    return answer = x * y;
 };
 function division(x, y) {
     if (y == 0) {
-        return display.textContent = 'Undefined'
+        return answer = '????'
     } else {
-        return display.textContent = x / y;
+        return answer = x / y;
     }
 };
 
@@ -37,14 +39,14 @@ function operate(a, b, c) {
 
 // Clear button functionality to empty the display 
 const clearButton = document.querySelector('#clear');
-clearButton.addEventListener('click', () => display.textContent = '');
+clearButton.addEventListener('click', () => {display.textContent = ''; currentValue = display.textContent});
 
 // Display population function and number button listeners
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((button) => {
     button.addEventListener('click', () => {
         display.textContent += button.id;
-        displayValue += button.id;
+        currentValue += button.id;
     });
 });
 // Listener for the operators, capturing the current displayValue and 
@@ -52,10 +54,29 @@ numbers.forEach((button) => {
 const operators = document.querySelectorAll('.operator');
 operators.forEach((button) => {
     button.addEventListener('click', () => {
-        argumentOne = Number(displayValue);
-        operator = button.id;
-        displayValue = '';
-        display.textContent = '';
+        if (argumentOne == '') {
+            argumentOne = Number(currentValue);
+            operator = button.id;
+            currentValue = '';
+            display.textContent = '';
+        } else if (argumentOne !== '') {
+            if (argumentOne !== '' && answer == '') {
+                argumentTwo = Number(currentValue);
+                operate(argumentOne, operator, argumentTwo);
+                operator = button.id;
+                smallDisplay.textContent = answer;
+                display.textContent = '';
+                currentValue = display.textContent;
+            } else {
+                argumentOne = Number(smallDisplay.textContent);
+                argumentTwo = Number(currentValue);
+                operate(argumentOne, operator, argumentTwo);
+                operator = button.id;
+                smallDisplay.textContent = answer;
+                display.textContent = '';
+                currentValue = display.textContent;
+            }
+        }
     });
 });
 
@@ -63,9 +84,19 @@ operators.forEach((button) => {
 // into the operate function
 const equals = document.querySelector('#equals');
 equals.addEventListener('click', () => {
-    argumentTwo = Number(displayValue);
-    operate(argumentOne, operator, argumentTwo)
-    displayValue = display.textContent;
+    if (smallDisplay.textContent == '') {
+        argumentTwo = Number(currentValue);
+        operate(argumentOne, operator, argumentTwo);
+        display.textContent = answer;
+        currentValue = display.textContent;
+    } else {
+        argumentOne = Number(smallDisplay.textContent); 
+        argumentTwo = Number(currentValue);
+        operate(argumentOne, operator, argumentTwo);
+        display.textContent = answer;
+        currentValue = display.textContent;
+        smallDisplay.textContent = '';
+    }
 });
 
 // Backspace functionality
@@ -73,21 +104,25 @@ const backspace = document.querySelector('#backspace');
 backspace.addEventListener('click', () => {
     let length = display.textContent.length;
     display.textContent = display.textContent.slice(0, (length-1));
-    displayValue = displayValue.slice(0, (length-1));
+    currentValue = currentValue.slice(0, (length-1));
 });
 
 // Clear button functionality to empty all data
 const empty = document.querySelector('#empty');
 empty.addEventListener('click', () => {
 display.textContent = '';
-displayValue = '';
+smallDisplay.textContent = '';
+currentValue = '';
 argumentOne = '';
 operator = '';
 argumentTwo = '';
+answer = '';
 });
 
-// Once a calculation is done. Change it so the next button pressed 'restarts'
-// ATM you have to clear before you use again
+// so if the display is showing an answer. Somehow see that, then, if the next button pressed
+// is a number button, not an operator, it will clear the calc.
+
+// limit the display
 
 // Also want to round decimals so they fit inside the display.
 
@@ -95,5 +130,6 @@ argumentTwo = '';
 
 // Allow functionality that multiple presses of equals will copy the last calculation done
 
-// add more complex scientific calc buttons
+// add commas for big numbers
 
+// add more complex scientific calc buttons

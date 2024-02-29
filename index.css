@@ -69,15 +69,31 @@ button:active {
     flex: 1;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 2px 2px black;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 1px;
+}
+
+.smallDisplay {
+    flex: auto;
+    display: flex;
+    height: 40px;
+    font-size: 30px;
+    color: grey;
+    align-items: end;
+    justify-content: end;
+
+}
+
 .display {
     flex: auto;
     display: flex;
     height: 83px;
-    box-shadow: 0px 0px 2px 2px black;
-    background-color: white;
-    margin-bottom: 1px;
-    border: none;
-    border-radius: 10px;
     font-size: 70px;
     color: black;
     align-items: end;
