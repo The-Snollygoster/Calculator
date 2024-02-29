@@ -14,7 +14,7 @@ let argumentTwo = '';
 let answer = '';
 
 function addition(x, y) {
-    return answer = x + y;
+    return answer = (x + y);
 };
 function subtraction(x, y) {
     return answer = x - y;
@@ -23,7 +23,7 @@ function multiplication(x, y) {
     return answer = x * y;
 };
 function division(x, y) {
-    if (y == 0) {
+    if (y === 0) {
         return answer = '????'
     } else {
         return answer = x / y;
@@ -62,7 +62,13 @@ operators.forEach((button) => {
         if (argumentOne == '') {
             argumentOne = Number(currentValue);
             operator = button.id;
-            smallDisplay.textContent = currentValue + operator;
+            if (operator == '*') {
+                smallDisplay.textContent = currentValue + 'x';
+            } else if (operator == '/') {
+                smallDisplay.textContent = currentValue + '÷';
+            } else {
+                smallDisplay.textContent = currentValue + operator;
+            }
             currentValue = '';
             display.value = '';
         } else if (argumentOne !== '') {
@@ -131,8 +137,6 @@ decimal.addEventListener('click', () => {
         currentValue += decimal.id;
     }
 });
-
-// Also want to round decimals so they fit inside the display.
 
 // add commas for big numbers
 
