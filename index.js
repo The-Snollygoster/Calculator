@@ -1,4 +1,3 @@
-// declared variables for computation
 let display = document.querySelector('.display');
 let smallDisplay = document.querySelector('.smallDisplay');
 let currentValue = '';
@@ -6,8 +5,6 @@ let argumentOne = '';
 let operator = '';
 let argumentTwo = '';
 let answer = '';
-
-// Basic functions
 function addition(x, y) {
     return answer = x + y;
 };
@@ -24,7 +21,6 @@ function division(x, y) {
         return answer = x / y;
     }
 };
-
 function operate(a, b, c) {
     if (b == '+') {
         addition(a,c);
@@ -122,6 +118,10 @@ answer = '';
 // so if the display is showing an answer. Somehow see that, then, if the next button pressed
 // is a number button, not an operator, it will clear the calc.
 
+// Yeah if there is an answer displayed and you go to click a number, it concatenates with the answer
+// so maybe something like. If I press a number button when the display is showing something equal to 
+// an answer, wipe the display first??
+
 // limit the display
 
 // Also want to round decimals so they fit inside the display.
@@ -133,3 +133,9 @@ answer = '';
 // add commas for big numbers
 
 // add more complex scientific calc buttons
+
+// When you press an operator, print the value and operator to the small screen first. 
+// Then have it take another value. If you press equals at that point. Have the small 
+// display show the entire calculation. 10 + 10 = big display will show the answer.
+
+// Mess around with where the numbers are. They're too close to the display edge for me
