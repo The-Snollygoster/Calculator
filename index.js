@@ -122,13 +122,19 @@ argumentTwo = '';
 answer = '';
 });
 
+const decimal = document.querySelector('.decimal');
+decimal.addEventListener('click', () => {
+    if (display.textContent.includes('.')) {
+        decimal.disabled = true;
+    } else {
+        display.textContent += decimal.id;
+        currentValue += decimal.id;
+    }
+});
+
 // limit the display
 
 // Also want to round decimals so they fit inside the display.
-
-// Make the decimal work but disable it when there is already a decimal in the display
-
-// Allow functionality that multiple presses of equals will copy the last calculation done
 
 // add commas for big numbers
 
