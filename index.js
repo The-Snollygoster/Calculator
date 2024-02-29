@@ -43,12 +43,12 @@ function operate(a, b, c) {
 
 numbers.forEach((button) => {
     button.addEventListener('click', () => {
-        if (display.textContent == answer && answer !== '') {
+        if (display.value == answer && answer !== '') {
             empty.click()
-            display.textContent += button.id;
+            display.value += button.id;
             currentValue += button.id;
         } else {
-            display.textContent += button.id;
+            display.value += button.id;
             currentValue += button.id;
         }
     });
@@ -61,23 +61,24 @@ operators.forEach((button) => {
             operator = button.id;
             smallDisplay.textContent = currentValue + operator;
             currentValue = '';
-            display.textContent = '';
+            display.value = '';
         } else if (argumentOne !== '') {
             if (answer == '') {
                 argumentTwo = Number(currentValue);
                 operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
-                display.textContent = '';
-                currentValue = display.textContent;
+                display.value = '';
+                currentValue = display.value;
             } else {
+                let smLength = smallDisplay.textContent.length;
                 argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
                 argumentTwo = Number(currentValue);
                 operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
-                smallDisplay.textContent = answer;
-                display.textContent = '';
-                currentValue = display.textContent;
+                smallDisplay.textContent = answer + operator;
+                display.value = '';
+                currentValue = display.value;
             }
         }
     });
@@ -87,30 +88,30 @@ equals.addEventListener('click', () => {
     if (smallDisplay.textContent == '') {
         argumentTwo = Number(currentValue);
         operate(argumentOne, operator, argumentTwo);
-        display.textContent = answer;
-        currentValue = display.textContent;
+        display.value = answer;
+        currentValue = display.value;
     } else {
         let smLength = smallDisplay.textContent.length;
         argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
         argumentTwo = Number(currentValue);
         operate(argumentOne, operator, argumentTwo);
-        display.textContent = answer;
-        currentValue = display.textContent;
+        display.value = answer;
+        currentValue = display.value;
         smallDisplay.textContent = '';
     }
 });
 
 clearButton.addEventListener('click', () => {
-    display.textContent = ''; currentValue = display.textContent});
+    display.value = ''; currentValue = display.value});
 
 backspace.addEventListener('click', () => {
-    let length = display.textContent.length;
-    display.textContent = display.textContent.slice(0, (length-1));
+    let length = display.value.length;
+    display.value = display.value.slice(0, (length-1));
     currentValue = currentValue.slice(0, (length-1));
 });
 
 empty.addEventListener('click', () => {
-    display.textContent = '';
+    display.value = '';
     smallDisplay.textContent = '';
     currentValue = '';
     argumentOne = '';
@@ -120,20 +121,18 @@ empty.addEventListener('click', () => {
 });
 
 decimal.addEventListener('click', () => {
-    if (display.textContent.includes('.')) {
+    if (display.value.includes('.')) {
         decimal.disabled = true;
     } else {
-        display.textContent += decimal.id;
+        display.value += decimal.id;
         currentValue += decimal.id;
     }
 });
 
 // limit the display
-
 // Also want to round decimals so they fit inside the display.
 
 // add commas for big numbers
+// Mess around with where the numbers are. They're too close to the display edge for me
 
 // add more complex scientific calc buttons
-
-// Mess around with where the numbers are. They're too close to the display edge for me

@@ -93,17 +93,17 @@ button:active {
     color: grey;
     align-items: end;
     justify-content: end;
-
 }
 
 .display {
     flex: auto;
-    display: flex;
     height: 83px;
     font-size: 70px;
     color: black;
-    align-items: end;
-    justify-content: end;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    text-align: end;
 }
 
 .decimal {
