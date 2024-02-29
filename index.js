@@ -41,10 +41,17 @@ clearButton.addEventListener('click', () => {display.textContent = ''; currentVa
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((button) => {
     button.addEventListener('click', () => {
-        display.textContent += button.id;
-        currentValue += button.id;
+        if (display.textContent == answer && answer !== '') {
+            empty.click()
+            display.textContent += button.id;
+            currentValue += button.id;
+        } else {
+            display.textContent += button.id;
+            currentValue += button.id;
+        }
     });
 });
+
 // Listener for the operators, capturing the current displayValue and 
 // operator and emptying display for second number
 const operators = document.querySelectorAll('.operator');
@@ -114,13 +121,6 @@ operator = '';
 argumentTwo = '';
 answer = '';
 });
-
-// so if the display is showing an answer. Somehow see that, then, if the next button pressed
-// is a number button, not an operator, it will clear the calc.
-
-// Yeah if there is an answer displayed and you go to click a number, it concatenates with the answer
-// so maybe something like. If I press a number button when the display is showing something equal to 
-// an answer, wipe the display first??
 
 // limit the display
 
