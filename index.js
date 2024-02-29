@@ -1,3 +1,10 @@
+const decimal = document.querySelector('.decimal');
+const clearButton = document.querySelector('#clear');
+const numbers = document.querySelectorAll('.number');
+const operators = document.querySelectorAll('.operator');
+const equals = document.querySelector('#equals');
+const backspace = document.querySelector('#backspace');
+const empty = document.querySelector('#empty');
 let display = document.querySelector('.display');
 let smallDisplay = document.querySelector('.smallDisplay');
 let currentValue = '';
@@ -5,6 +12,7 @@ let argumentOne = '';
 let operator = '';
 let argumentTwo = '';
 let answer = '';
+
 function addition(x, y) {
     return answer = x + y;
 };
@@ -33,12 +41,6 @@ function operate(a, b, c) {
     }
 };
 
-// Clear button functionality to empty the display 
-const clearButton = document.querySelector('#clear');
-clearButton.addEventListener('click', () => {display.textContent = ''; currentValue = display.textContent});
-
-// Display population function and number button listeners
-const numbers = document.querySelectorAll('.number');
 numbers.forEach((button) => {
     button.addEventListener('click', () => {
         if (display.textContent == answer && answer !== '') {
@@ -52,26 +54,24 @@ numbers.forEach((button) => {
     });
 });
 
-// Listener for the operators, capturing the current displayValue and 
-// operator and emptying display for second number
-const operators = document.querySelectorAll('.operator');
 operators.forEach((button) => {
     button.addEventListener('click', () => {
         if (argumentOne == '') {
             argumentOne = Number(currentValue);
             operator = button.id;
+            smallDisplay.textContent = currentValue + operator;
             currentValue = '';
             display.textContent = '';
         } else if (argumentOne !== '') {
-            if (argumentOne !== '' && answer == '') {
+            if (answer == '') {
                 argumentTwo = Number(currentValue);
                 operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
-                smallDisplay.textContent = answer;
+                smallDisplay.textContent = answer + operator;
                 display.textContent = '';
                 currentValue = display.textContent;
             } else {
-                argumentOne = Number(smallDisplay.textContent);
+                argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
                 argumentTwo = Number(currentValue);
                 operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
@@ -83,9 +83,6 @@ operators.forEach((button) => {
     });
 });
 
-// equals function, that takes the value in display as the second argument and passed them 
-// into the operate function
-const equals = document.querySelector('#equals');
 equals.addEventListener('click', () => {
     if (smallDisplay.textContent == '') {
         argumentTwo = Number(currentValue);
@@ -93,7 +90,8 @@ equals.addEventListener('click', () => {
         display.textContent = answer;
         currentValue = display.textContent;
     } else {
-        argumentOne = Number(smallDisplay.textContent); 
+        let smLength = smallDisplay.textContent.length;
+        argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
         argumentTwo = Number(currentValue);
         operate(argumentOne, operator, argumentTwo);
         display.textContent = answer;
@@ -102,27 +100,25 @@ equals.addEventListener('click', () => {
     }
 });
 
-// Backspace functionality
-const backspace = document.querySelector('#backspace');
+clearButton.addEventListener('click', () => {
+    display.textContent = ''; currentValue = display.textContent});
+
 backspace.addEventListener('click', () => {
     let length = display.textContent.length;
     display.textContent = display.textContent.slice(0, (length-1));
     currentValue = currentValue.slice(0, (length-1));
 });
 
-// Clear button functionality to empty all data
-const empty = document.querySelector('#empty');
 empty.addEventListener('click', () => {
-display.textContent = '';
-smallDisplay.textContent = '';
-currentValue = '';
-argumentOne = '';
-operator = '';
-argumentTwo = '';
-answer = '';
+    display.textContent = '';
+    smallDisplay.textContent = '';
+    currentValue = '';
+    argumentOne = '';
+    operator = '';
+    argumentTwo = '';
+    answer = '';
 });
 
-const decimal = document.querySelector('.decimal');
 decimal.addEventListener('click', () => {
     if (display.textContent.includes('.')) {
         decimal.disabled = true;
@@ -139,9 +135,5 @@ decimal.addEventListener('click', () => {
 // add commas for big numbers
 
 // add more complex scientific calc buttons
-
-// When you press an operator, print the value and operator to the small screen first. 
-// Then have it take another value. If you press equals at that point. Have the small 
-// display show the entire calculation. 10 + 10 = big display will show the answer.
 
 // Mess around with where the numbers are. They're too close to the display edge for me
