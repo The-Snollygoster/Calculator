@@ -43,8 +43,11 @@ function operate(a, b, c) {
 
 numbers.forEach((button) => {
     button.addEventListener('click', () => {
-        if (display.value == answer && answer !== '') {
-            empty.click()
+        if (display.value.length > 8) {
+            display.value = display.value;
+            currentValue = display.value;
+        } else if (display.value == answer && answer !== '') {
+            empty.click();
             display.value += button.id;
             currentValue += button.id;
         } else {
@@ -129,10 +132,8 @@ decimal.addEventListener('click', () => {
     }
 });
 
-// limit the display
 // Also want to round decimals so they fit inside the display.
 
 // add commas for big numbers
-// Mess around with where the numbers are. They're too close to the display edge for me
 
-// add more complex scientific calc buttons
+// add more complex buttons like +/- % square etc. Then maybe scientific calc buttons.
