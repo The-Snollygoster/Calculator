@@ -140,4 +140,14 @@ decimal.addEventListener('click', () => {
 
 // add commas for big numbers
 
-// add more complex buttons like +/- % square etc. Then maybe scientific calc buttons.
+// +/- button. That converts the current number in the display to a negative or positive
+
+// square root button
+
+// square button 
+
+// cube button
+
+// percent button
+
+// bracket buttons. Might combine these into 1 so I can add the % button?

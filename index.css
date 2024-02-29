@@ -10,8 +10,7 @@ body {
     color: #99aab5;
 }
 
-.number,
-.button {
+.number {
     flex: 1;
     margin: 1px;
     border: none;
@@ -25,6 +24,22 @@ body {
 
 .number:hover {
     background-color: grey;
+}
+
+.button {
+    flex: 1;
+    margin: 1px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px black;
+    opacity: 1;
+    transition: 0.2s;
+    background-color: #b39797;
+    font-size: x-large;
+}
+
+.button:hover {
+    background-color: #a76f6f;
 }
 
 .operator {
@@ -46,7 +61,7 @@ body {
 }
 
 .operate {
-    width: 208px;
+    flex: 1;
     height: 70px;
     margin: 1px;
     border: none;
@@ -56,6 +71,28 @@ body {
     transition: 0.2s;
     background-color: #83b1b9;
     font-size: x-large;
+}
+
+.operate:hover {
+    background-color: #2c9db1;
+}
+
+.specialOperator {
+    flex: 1;
+    width: 100px;
+    height: 70px;
+    margin: 1px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px black;
+    opacity: 1;
+    transition: 0.2s;
+    background-color: grey;
+    font-size: x-large;
+}
+
+.specialOperator:hover {
+    background-color: #b3afaf;
 }
 
 button:active {
@@ -116,4 +153,8 @@ button:active {
     transition: 0.2s;
     background-color: #b3afaf;
     font-size: x-large;
+}
+
+.decimal:hover {
+    background-color: grey;
 }
