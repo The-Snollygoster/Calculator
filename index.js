@@ -1,15 +1,8 @@
-const decimal = document.querySelector('.decimal');
-const clearButton = document.querySelector('#clear');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
+const specialOperators = document.querySelectorAll('.specialOperator');
+const additionalButtons = document.querySelectorAll('.button');
 const equals = document.querySelector('#equals');
-const backspace = document.querySelector('#backspace');
-const empty = document.querySelector('#empty');
-const plusMinus = document.querySelector('#convert');
-const root = document.querySelector('#root');
-const square = document.querySelector('#square');
-const percent = document.querySelector('#percent');
-// const bracket = document.querySelector('#bracket');
 let display = document.querySelector('.display');
 let smallDisplay = document.querySelector('.smallDisplay');
 let smLength = smallDisplay.textContent.length;
@@ -53,20 +46,26 @@ numbers.forEach((button) => {
             display.value = display.value;
             currentValue = display.value;
         } else if (display.value == answer && answer !== '') {
-            empty.click();
+            document.getElementById('clear').click();
             display.value += button.id;
             currentValue += button.id;
         } else if (display.value == argumentOne && argumentTwo == '') {
-            clearButton.click();
+            document.getElementById('clear').click();
             display.value += button.id;
             currentValue += button.id;
         } else if (display.value == argumentTwo) {
-            clearButton.click();
+            document.getElementById('clear').click();
             display.value += button.id;
             currentValue += button.id;
         } else {
             display.value += button.id;
             currentValue += button.id;
+        }
+
+        if (display.value.includes('.')) {
+            document.getElementById('.').disabled = true;
+        } else {
+            document.getElementById('.').disabled = false;
         }
     });
 });
@@ -96,9 +95,10 @@ operators.forEach((button) => {
                 currentValue = display.value;
             } else if (display.value == answer) { 
                 argumentOne = answer;
+                argumentTwo = Number(currentValue);
+                operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
-                display.value = '';
                 currentValue = display.value;
             } else {
                 argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
@@ -128,108 +128,96 @@ equals.addEventListener('click', () => {
     }
 });
 
-clearButton.addEventListener('click', () => {
-    display.value = ''; currentValue = display.value});
-
-backspace.addEventListener('click', () => {
-    let length = display.value.length;
-    display.value = display.value.slice(0, (length-1));
-    currentValue = currentValue.slice(0, (length-1));
-});
-
-empty.addEventListener('click', () => {
-    display.value = '';
-    smallDisplay.textContent = '';
-    currentValue = '';
-    argumentOne = '';
-    operator = '';
-    argumentTwo = '';
-    answer = '';
-});
-
-decimal.addEventListener('click', () => {
-    if (display.value.includes('.')) {
-        decimal.disabled = true;
-    } else {
-        display.value += decimal.id;
-        currentValue += decimal.id;
-    }
-});
-
-convert.addEventListener('click', () => {
-    if (currentValue > -1) {
-    display.value = -Math.abs(currentValue);
-    currentValue = display.value;
-    } else if (currentValue < 0) {
-    display.value = Math.abs(currentValue);
-    currentValue = display.value;
-    }
-});
-
-root.addEventListener('click', () => {
-    let rootAnswer = Math.sqrt(currentValue);
-    if (rootAnswer.toString().length > 9) {
-        display.value = rootAnswer.toFixed(5)
-    } else {
-        display.value = Math.sqrt(currentValue);
-    }
-    currentValue = display.value;
-    answer = display.value;
-});
-
-square.addEventListener('click', () => {
-    display.value = currentValue * currentValue;
-    currentValue = display.value;
-});
-
-percent.addEventListener('click', () => {
-    if (typeof Number(display.value) === 'number' && typeof argumentOne === 'number') {
-        if (operator == '*') {
-            display.value = currentValue / 100 * argumentOne;
+additionalButtons.forEach((button) => {
+    button.addEventListener('click', () => { 
+        if (button.id == 'empty') {
+            display.value = '';
+            smallDisplay.textContent = '';
+            currentValue = '';
+            argumentOne = '';
+            operator = '';
+            argumentTwo = '';
+            answer = '';
+            document.getElementById('.').disabled = false;
+        } else if (button.id == 'clear') {
+            display.value = ''; 
             currentValue = display.value;
-            answer = display.value;
-        } else if (operator == '+') {
-            let percentInt = currentValue / 100 * argumentOne;
-            display.value = argumentOne + percentInt;
-            currentValue = display.value;
-            answer = display.value;
-        } else if (operator == '-') {
-            let percentInt = currentValue / 100 * argumentOne;
-            display.value = argumentOne - percentInt;
-            currentValue = display.value;
-            answer = display.value;
-        } else {
-            display.value = 'Error';
+            document.getElementById('.').disabled = false;
+        } else if (button.id == 'backspace') {
+            let length = display.value.length;
+            display.value = display.value.slice(0, (length-1));
+            currentValue = currentValue.slice(0, (length-1));
         }
-    } else {
-        display.value = 'Error';
-    }
+    });
 });
 
-document.addEventListener('keydown', (event) => {keyDown(event.key), console.log(event.key)});
+specialOperators.forEach((button) => {
+    button.addEventListener('click', () => { 
+        if (button.id == 'convert') {
+            if (currentValue > -1) {
+                display.value = -Math.abs(currentValue);
+                currentValue = display.value;
+            } else if (currentValue < 0) {
+                display.value = Math.abs(currentValue);
+                currentValue = display.value;
+            }
+        } else if (button.id == 'root') {
+            let rootAnswer = Math.sqrt(currentValue);
+            if (rootAnswer.toString().length > 9) {
+                display.value = rootAnswer.toFixed(5)
+            } else {
+                display.value = Math.sqrt(currentValue);
+            }
+            currentValue = display.value;
+            answer = display.value;
+        } else if (button.id == 'square') {
+            display.value = currentValue * currentValue;
+            currentValue = display.value;
+        } else if (button.id == 'percent') {
+            if (typeof Number(display.value) === 'number' && typeof argumentOne === 'number') {
+                if (operator == '*') {
+                    display.value = currentValue / 100 * argumentOne;
+                    currentValue = display.value;
+                    answer = display.value;
+                } else if (operator == '+') {
+                    let percentInt = currentValue / 100 * argumentOne;
+                    display.value = argumentOne + percentInt;
+                    currentValue = display.value;
+                    answer = display.value;
+                } else if (operator == '-') {
+                    let percentInt = currentValue / 100 * argumentOne;
+                    display.value = argumentOne - percentInt;
+                    currentValue = display.value;
+                    answer = display.value;
+                } else {
+                    display.value = 'Error';
+                }
+            } else {
+                display.value = 'Error';
+            } 
+        }
+        //else if (button.id == 'bracket') {
+        //     if (display.value.includes('(')) {
+        //     display.value += ')';
+        //     } else {
+        //     display.value += '(';
+        //     }
+        // }
+    });
+});
+
+document.addEventListener('keydown', (event) => {keyDown(event.key)});
 
 function keyDown(key) {
     if (key == 'Enter') {
-        equals.click();
+        document.getElementById('equals').click();
     } else if (key == 'Backspace') {
-        backspace.click();
+        document.getElementById('backspace').click();
     } else if (key == 'Escape') {
-        empty.click();
+        document.getElementById('empty').click();
     } else if (key == '+' || key == '-' || key == '/' || key == '*' || key == '.') {
         document.getElementById(key).click();
     } else if (typeof Number(key) === 'number') {
         document.getElementById(key).click();
     }
 };
-
-// I was going to add a brackets button at request but honestly I don't see a reason for it
-// bracket.addEventListener('click', () => {
-//     if (display.value.includes('(')) {
-//     display.value += ')';
-//     } else {
-//     display.value += '(';
-//     }
-// });
-
-// add commas for big numbers
-// clean up special operators with a .forEach() event listener. And other click events if needed
