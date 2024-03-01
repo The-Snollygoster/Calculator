@@ -56,6 +56,14 @@ numbers.forEach((button) => {
             empty.click();
             display.value += button.id;
             currentValue += button.id;
+        } else if (display.value == argumentOne && argumentTwo == '') {
+            clearButton.click();
+            display.value += button.id;
+            currentValue += button.id;
+        } else if (display.value == argumentTwo) {
+            clearButton.click();
+            display.value += button.id;
+            currentValue += button.id;
         } else {
             display.value += button.id;
             currentValue += button.id;
@@ -78,15 +86,13 @@ operators.forEach((button) => {
             } else {
                 smallDisplay.textContent = currentValue + operator;
             }
-            currentValue = '';
-            display.value = '';
+            currentValue = display.value;
         } else if (argumentOne !== '') {
             if (answer == '') {
                 argumentTwo = Number(currentValue);
                 operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
-                display.value = '';
                 currentValue = display.value;
             } else if (display.value == answer) { 
                 argumentOne = answer;
@@ -100,7 +106,6 @@ operators.forEach((button) => {
                 operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
-                display.value = '';
                 currentValue = display.value;
             }
         }
@@ -210,8 +215,8 @@ percent.addEventListener('click', () => {
 //     }
 // });
 
-// add commas for big numbers
-
 // When you click an operator, have the current value stay in the display and only clear it when you enter the second number
-
+// add commas for big numbers
 // add keyboard support
+
+// when I have a chained Sum I clear then use a negative number I get weird things.
