@@ -206,6 +206,22 @@ percent.addEventListener('click', () => {
     }
 });
 
+document.addEventListener('keydown', (event) => {keyDown(event.key), console.log(event.key)});
+
+function keyDown(key) {
+    if (key == 'Enter') {
+        equals.click();
+    } else if (key == 'Backspace') {
+        backspace.click();
+    } else if (key == 'Escape') {
+        empty.click();
+    } else if (key == '+' || key == '-' || key == '/' || key == '*' || key == '.') {
+        document.getElementById(key).click();
+    } else if (typeof Number(key) === 'number') {
+        document.getElementById(key).click();
+    }
+};
+
 // I was going to add a brackets button at request but honestly I don't see a reason for it
 // bracket.addEventListener('click', () => {
 //     if (display.value.includes('(')) {
@@ -215,8 +231,5 @@ percent.addEventListener('click', () => {
 //     }
 // });
 
-// When you click an operator, have the current value stay in the display and only clear it when you enter the second number
 // add commas for big numbers
-// add keyboard support
-
-// when I have a chained Sum I clear then use a negative number I get weird things.
+// clean up special operators with a .forEach() event listener. And other click events if needed
