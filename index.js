@@ -13,6 +13,7 @@ const oBracket = document.querySelector('#openBracket');
 const cBracket = document.querySelector('#closeBracket');
 let display = document.querySelector('.display');
 let smallDisplay = document.querySelector('.smallDisplay');
+let smLength = smallDisplay.textContent.length;
 let currentValue = '';
 let argumentOne = '';
 let operator = '';
@@ -30,7 +31,7 @@ function multiplication(x, y) {
 };
 function division(x, y) {
     if (y === 0) {
-        return answer = '????'
+        return answer = 'Error';
     } else {
         return answer = x / y;
     }
@@ -85,8 +86,13 @@ operators.forEach((button) => {
                 smallDisplay.textContent = answer + operator;
                 display.value = '';
                 currentValue = display.value;
+            } else if (display.value == answer) { 
+                argumentOne = answer;
+                operator = button.id;
+                smallDisplay.textContent = answer + operator;
+                display.value = '';
+                currentValue = display.value;
             } else {
-                let smLength = smallDisplay.textContent.length;
                 argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
                 argumentTwo = Number(currentValue);
                 operate(argumentOne, operator, argumentTwo);
@@ -106,7 +112,6 @@ equals.addEventListener('click', () => {
         display.value = answer;
         currentValue = display.value;
     } else {
-        let smLength = smallDisplay.textContent.length;
         argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
         argumentTwo = Number(currentValue);
         operate(argumentOne, operator, argumentTwo);
@@ -171,9 +176,28 @@ square.addEventListener('click', () => {
 });
 
 percent.addEventListener('click', () => {
-
+    if (typeof Number(display.value) === 'number' && typeof argumentOne === 'number') {
+        if (operator == '*') {
+            display.value = currentValue / 100 * argumentOne;
+            currentValue = display.value;
+            answer = display.value;
+        } else if (operator == '+') {
+            let percentInt = currentValue / 100 * argumentOne;
+            display.value = argumentOne + percentInt;
+            currentValue = display.value;
+            answer = display.value;
+        } else if (operator == '-') {
+            let percentInt = currentValue / 100 * argumentOne;
+            display.value = argumentOne - percentInt;
+            currentValue = display.value;
+            answer = display.value;
+        } else {
+            display.value = 'Error';
+        }
+    } else {
+        display.value = 'Error';
+    }
 });
-percent.disabled = true;
 
 oBracket.addEventListener('click', () => {
     display.value += '(';
@@ -188,3 +212,7 @@ cBracket.disabled = true;
 // add commas for big numbers
 
 // allow the use of minus as the first button pressed to express a negative number
+
+// show the whole equation in the small display
+
+// (52x8 % = 4.16 +) resulted in the smalldisplay showing 416+ so the operator function takes out the decimal.
