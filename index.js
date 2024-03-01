@@ -9,8 +9,7 @@ const plusMinus = document.querySelector('#convert');
 const root = document.querySelector('#root');
 const square = document.querySelector('#square');
 const percent = document.querySelector('#percent');
-const oBracket = document.querySelector('#openBracket');
-const cBracket = document.querySelector('#closeBracket');
+// const bracket = document.querySelector('#bracket');
 let display = document.querySelector('.display');
 let smallDisplay = document.querySelector('.smallDisplay');
 let smLength = smallDisplay.textContent.length;
@@ -66,7 +65,10 @@ numbers.forEach((button) => {
 
 operators.forEach((button) => {
     button.addEventListener('click', () => { 
-        if (argumentOne == '') {
+        if (button.id == '-' && display.value == '') {
+            display.value = '-';
+            currentValue += button.id;
+        } else if (argumentOne == '') {
             argumentOne = Number(currentValue);
             operator = button.id;
             if (operator == '*') {
@@ -199,20 +201,17 @@ percent.addEventListener('click', () => {
     }
 });
 
-oBracket.addEventListener('click', () => {
-    display.value += '(';
-});
-oBracket.disabled = true;
-
-cBracket.addEventListener('click', () => {
-    display.value += ')';
-});
-cBracket.disabled = true;
+// I was going to add a brackets button at request but honestly I don't see a reason for it
+// bracket.addEventListener('click', () => {
+//     if (display.value.includes('(')) {
+//     display.value += ')';
+//     } else {
+//     display.value += '(';
+//     }
+// });
 
 // add commas for big numbers
 
-// allow the use of minus as the first button pressed to express a negative number
+// When you click an operator, have the current value stay in the display and only clear it when you enter the second number
 
-// show the whole equation in the small display
-
-// (52x8 % = 4.16 +) resulted in the smalldisplay showing 416+ so the operator function takes out the decimal.
+// add keyboard support

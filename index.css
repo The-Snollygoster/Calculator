@@ -61,8 +61,8 @@ body {
 }
 
 .operate {
-    flex: 1;
     height: 70px;
+    width: 166px;
     margin: 1px;
     border: none;
     border-radius: 10px;
