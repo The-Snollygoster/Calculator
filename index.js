@@ -13,19 +13,19 @@ let argumentTwo = '';
 let answer = '';
 
 function addition(x, y) {
-    return answer = (x + y);
+    return answer = (x + y).toFixed(2).replace(/[.,]0+$/, "");;
 };
 function subtraction(x, y) {
-    return answer = x - y;
+    return answer = (x - y).toFixed(2).replace(/[.,]00$/, "");;
 };
 function multiplication(x, y) {
-    return answer = x * y;
+    return answer = (x * y).toFixed(2).replace(/[.,]00$/, "");;
 };
 function division(x, y) {
     if (y === 0) {
         return answer = 'Error';
     } else {
-        return answer = x / y;
+        return answer = (x / y).toFixed(2).replace(/[.,]00$/, "");;
     }
 };
 function operate(a, b, c) {
