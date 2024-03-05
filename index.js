@@ -95,8 +95,6 @@ operators.forEach((button) => {
                 currentValue = display.value;
             } else if (display.value == answer) { 
                 argumentOne = answer;
-                argumentTwo = Number(currentValue);
-                operate(argumentOne, operator, argumentTwo);
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
                 currentValue = display.value;
