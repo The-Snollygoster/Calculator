@@ -52,6 +52,8 @@ numbers.forEach((button) => {
         // } else if (display.value == button.id && argumentTwo == 'sum') {
         //     argumentTwo = 'initialise'
         } else if (display.value == button.id && argumentTwo == '') {
+            // the two lines below active makes 4 + 55 work but 4 + 4 break because it adds itself
+            // the bottom line active makes everything work but 4 + 55 needs an additional press of 5
             // display.value += button.id;
             // currentValue += button.id;
             argumentTwo = 'sum'
