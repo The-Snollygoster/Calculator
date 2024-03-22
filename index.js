@@ -49,6 +49,12 @@ numbers.forEach((button) => {
             document.getElementById('clear').click();
             display.value += button.id;
             currentValue += button.id;
+        // } else if (display.value == button.id && argumentTwo == 'sum') {
+        //     argumentTwo = 'initialise'
+        } else if (display.value == button.id && argumentTwo == '') {
+            // display.value += button.id;
+            // currentValue += button.id;
+            argumentTwo = 'sum'
         } else if (display.value == argumentOne && argumentTwo == '') {
             document.getElementById('clear').click();
             display.value += button.id;
