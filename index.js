@@ -45,26 +45,18 @@ numbers.forEach((button) => {
         if (display.value.length > 8) {
             display.value = display.value;
             currentValue = display.value;
-        } else if (display.value == answer && answer !== '') {
-            document.getElementById('clear').click();
-            display.value += button.id;
-            currentValue += button.id;
-        // } else if (display.value == button.id && argumentTwo == 'sum') {
-        //     argumentTwo = 'initialise'
-        } else if (display.value == button.id && argumentTwo == '') {
-            // the two lines below active makes 4 + 55 work but 4 + 4 break because it adds itself
-            // the bottom line active makes everything work but 4 + 55 needs an additional press of 5
-            // display.value += button.id;
-            // currentValue += button.id;
-            argumentTwo = 'sum'
-        } else if (display.value == argumentOne && argumentTwo == '') {
-            document.getElementById('clear').click();
-            display.value += button.id;
-            currentValue += button.id;
-        } else if (display.value == argumentTwo) {
-            document.getElementById('clear').click();
-            display.value += button.id;
-            currentValue += button.id;
+        // } else if (display.value == answer && answer !== '') {
+        //     document.getElementById('clear').click();
+        //     display.value += button.id;
+        //     currentValue += button.id;
+        // } else if (display.value == argumentOne && argumentTwo == '') {
+        //     document.getElementById('clear').click();
+        //     display.value += button.id;
+        //     currentValue += button.id;
+        // } else if (display.value == argumentTwo) {
+        //     document.getElementById('clear').click();
+        //     display.value += button.id;
+        //     currentValue += button.id;
         } else {
             display.value += button.id;
             currentValue += button.id;
@@ -77,6 +69,9 @@ numbers.forEach((button) => {
         }
     });
 });
+
+// can't do 4 + 44 right now because when I type 44. When I hit the second 4, it clears first, then retypes 4.
+// Which only happens when argument 2 matches the display value
 
 operators.forEach((button) => {
     button.addEventListener('click', () => { 
@@ -94,6 +89,7 @@ operators.forEach((button) => {
                 smallDisplay.textContent = currentValue + operator;
             }
             currentValue = display.value;
+            document.getElementById('clear').click();
         } else if (argumentOne !== '') {
             if (answer == '') {
                 argumentTwo = Number(currentValue);
@@ -101,11 +97,13 @@ operators.forEach((button) => {
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
                 currentValue = display.value;
+                document.getElementById('clear').click();
             } else if (display.value == answer) { 
                 argumentOne = answer;
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
                 currentValue = display.value;
+                document.getElementById('clear').click();
             } else {
                 argumentOne = Number(smallDisplay.textContent.slice(0, (smLength-1)));
                 argumentTwo = Number(currentValue);
@@ -113,6 +111,7 @@ operators.forEach((button) => {
                 operator = button.id;
                 smallDisplay.textContent = answer + operator;
                 currentValue = display.value;
+                document.getElementById('clear').click();
             }
         }
     });
@@ -202,13 +201,6 @@ specialOperators.forEach((button) => {
                 display.value = 'Error';
             } 
         }
-        //else if (button.id == 'bracket') {
-        //     if (display.value.includes('(')) {
-        //     display.value += ')';
-        //     } else {
-        //     display.value += '(';
-        //     }
-        // }
     });
 });
 
